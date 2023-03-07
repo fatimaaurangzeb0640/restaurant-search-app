@@ -1,4 +1,4 @@
-import { StyleSheet, View,  } from 'react-native';
+import { StyleSheet, View} from 'react-native';
 import RootStack from './src/navigation/RootStack';
 
 export default function App() {
