@@ -1,5 +1,5 @@
 import React, {FunctionComponent, useState} from "react";
-import {View, StyleSheet, TextInput, Text, TouchableHighlight} from "react-native"
+import {View, StyleSheet, TextInput, Text, TouchableHighlight, TouchableOpacity} from "react-native"
 import {Feather} from "@expo/vector-icons"
 
 //types
@@ -10,9 +10,9 @@ const Searchbar:FunctionComponent<SearchBarProps> = ({ term, handleOnChange, han
     return(
         <View style={styles.background}>
             <Feather name="search" size={30} style={styles.icon} />
-            <TouchableHighlight>
+            {/* <TouchableOpacity> */}
                 <TextInput value={term} onChangeText={handleOnChange} onEndEditing={handleOnSubmit} style={styles.input} placeholder="Search"/>   
-            </TouchableHighlight>
+            {/* </TouchableOpacity> */}
         </View>
     )
 }
@@ -22,7 +22,6 @@ const styles = StyleSheet.create({
         backgroundColor:"#F0EEEE",
         height: 50,
         flexDirection: "row",
-        // marginHorizontal: 15,
         marginVertical: 10,
         borderRadius: 8,
         alignItems:"center"

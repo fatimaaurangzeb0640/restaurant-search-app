@@ -1,23 +1,35 @@
 import React, {FunctionComponent, } from "react";
-import {View, StyleSheet, Text, FlatList, Image } from "react-native"
+import {View, StyleSheet, Text, Image, TouchableOpacity } from "react-native"
 
 
 //types
 import { ResultProps } from "./types";
 
+import {useNavigation} from "@react-navigation/native"
+
+import {Props as SearchProps} from "../screens/Search"
 
 
-const ResultDetail:FunctionComponent<ResultProps> = ( result) => {
-    const {image_url, name} = result
+
+const ResultDetail:FunctionComponent<ResultProps> = ( props) => {
+    const {image_url, name, rating, review_count} = props
+
+    const navigation = useNavigation<SearchProps["navigation"]>()
+
+    const handlePress = () =>{
+        navigation.navigate("ResultShow", {...props })
+    }
    
     return(
-        <View style={styles.listItem}>
-            <Text style={styles.name}>{name}</Text>
-            {/*For images from a remote source */}
-            <Image style={styles.image} source={{uri: image_url}} />
-            <Text style={styles.subtitle}>{result.rating} Stars, {result.review_count} Reviews</Text>
-           
-        </View>
+        <TouchableOpacity onPress={handlePress}>
+            <View style={styles.listItem}>
+                <Text style={styles.name}>{name}</Text>
+                {/*For images from a remote source */}
+                <Image style={styles.image} source={{uri: image_url}} />
+                <Text style={styles.subtitle}>{rating} Stars, {review_count} Reviews</Text>
+            
+            </View>
+        </TouchableOpacity>
     )
 }
 

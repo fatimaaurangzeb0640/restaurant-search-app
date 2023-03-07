@@ -1,13 +1,16 @@
 import React, {useState, useCallback, useEffect} from "react";
-import {View, Text, StyleSheet} from "react-native";
+import {View, Text, StyleSheet, ScrollView} from "react-native";
 import Searchbar from "../components/SearchBar";
 import yelp from "../api/yelp";
-import axios from "axios"
 import ResultList from "../components/ResultList";
 import { ResultProps } from "../components/types";
 
 
+import { RootStackParamList } from "../navigation/RootStack";
+import { StackScreenProps } from "@react-navigation/stack" 
 
+
+export type Props = StackScreenProps<RootStackParamList, "Search">
 
 const SearchScreen = () => {
 
@@ -50,9 +53,11 @@ const SearchScreen = () => {
         <View style={styles.appBackground}>
             <Searchbar term={term} handleOnChange={newTerm=> setTerm(newTerm)} handleOnSubmit={handleOnSubmit} />
             <Text style={styles.title}>We have found {results.length} results</Text>
-            <ResultList title={"Cost Effective"} results={filterResultsByPrice('$')}></ResultList>
-            <ResultList title={"Bit Pricier"} results={filterResultsByPrice('$$')}></ResultList>
-            <ResultList title={"Big Spender"} results={filterResultsByPrice('$$$')}></ResultList>
+            <ScrollView>
+                <ResultList title={"Cost Effective"} results={filterResultsByPrice('$')}></ResultList>
+                <ResultList title={"Bit Pricier"} results={filterResultsByPrice('$$')}></ResultList>
+                <ResultList title={"Big Spender"} results={filterResultsByPrice('$$$')}></ResultList>
+            </ScrollView>
             <Text>{errorMessage}</Text>
         </View>
     )
